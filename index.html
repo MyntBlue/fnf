@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Mod Select</title>
+
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: #0e0e12;
+        color: white;
+        overflow: hidden;
+        display: flex;
+    }
+
+    /* LEFT MENU */
+    .menu {
+        width: 300px;
+        height: 100vh;
+        background: linear-gradient(180deg, #181825, #0e0e12);
+        padding: 20px 0;
+        box-shadow: 4px 0 20px rgba(0,0,0,0.6);
+    }
+
+    .menu-title {
+        text-align: center;
+        font-size: 20px;
+        margin-bottom: 20px;
+        opacity: 0.9;
+    }
+
+    .menu-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .menu-item {
+        padding: 14px 30px;
+        font-size: 18px;
+        opacity: 0.6;
+        transition: all 0.2s ease;
+        cursor: default;
+    }
+
+    .menu-item.active {
+        opacity: 1;
+        background: linear-gradient(90deg, #ff66aa, #ff99cc);
+        color: black;
+        transform: translateX(8px);
+        border-radius: 0 20px 20px 0;
+    }
+
+    .hint {
+        position: absolute;
+        bottom: 20px;
+        width: 300px;
+        text-align: center;
+        font-size: 12px;
+        opacity: 0.4;
+    }
+
+    /* RIGHT PREVIEW */
+    .preview {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: radial-gradient(circle at center, #1a1a2e, #0e0e12);
+    }
+
+    .preview img {
+        max-width: 80%;
+        max-height: 80%;
+        border-radius: 16px;
+        box-shadow: 0 0 40px rgba(255,102,170,0.3);
+        transition: opacity 0.2s ease;
+    }
+</style>
+</head>
+<body>
+
+<!-- LEFT MENU -->
+<div class="menu">
+    <div class="menu-title">SELECT MOD</div>
+    <ul class="menu-list" id="menu">
+        <li class="menu-item active" data-image="images/fnf.png" data-link="mods/fnf.html">Default</li>
+        <li class="menu-item" data-image="images/hit.png" data-link="mods/hit.html">Hit Single</li>
+        <li class="menu-item" data-image="images/indie.png" data-link="mods/indie.html">Indie Cross</li>
+        <li class="menu-item" data-image="images/soft.png" data-link="mods/soft.html">Soft</li>
+        <li class="menu-item" data-image="images/credits.png" data-link="credits.html">Credits</li>
+    </ul>
+    <div class="hint">↑ ↓ Navigate • Enter Select</div>
+</div>
+
+<!-- RIGHT PREVIEW -->
+<div class="preview">
+    <img id="previewImage" src="images/fnf.png" alt="Preview">
+</div>
+
+<script>
+    const items = document.querySelectorAll('.menu-item');
+    const previewImage = document.getElementById('previewImage');
+    let index = 0;
+
+    function updateSelection() {
+        items.forEach(item => item.classList.remove('active'));
+        const current = items[index];
+        current.classList.add('active');
+
+        previewImage.style.opacity = 0;
+        setTimeout(() => {
+            previewImage.src = current.dataset.image;
+            previewImage.style.opacity = 1;
+        }, 100);
+    }
+
+    document.addEventListener('keydown', e => {
+        if (e.key === 'ArrowDown') {
+            index = (index + 1) % items.length;
+            updateSelection();
+        }
+
+        if (e.key === 'ArrowUp') {
+            index = (index - 1 + items.length) % items.length;
+            updateSelection();
+        }
+
+        if (e.key === 'Enter') {
+            window.location.href = items[index].dataset.link;
+        }
+    });
+</script>
+
+</body>
+</html>
