@@ -1,26 +1,25 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
-  </head>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
 
-  <body margin="0">
-    <object
-      id="embed"
-      data="https://gamaverse.com/c/f/g/fnf-jeffys-infinite-irida-shucks-demo-1766301379/"
-      type="text/html">
-    </object>
+    object {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+  </style>
+</head>
 
-    <script>
-      const obj = document.getElementById("embed");
-
-      function resize() {
-        obj.width = window.innerWidth;
-        obj.height = window.innerHeight;
-      }
-
-      window.addEventListener("resize", resize);
-      resize();
-    </script>
-  </body>
+<body>
+  <object data="https://gamaverse.com/c/f/g/fnf-jeffys-infinite-irida-shucks-demo-1766301379/" type="text/html"></object>
+</body>
 </html>
